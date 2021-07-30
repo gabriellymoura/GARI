@@ -43,13 +43,13 @@ def callback(ga_instance):
     print("Generation = {gen}".format(gen=ga_instance.generations_completed))
     print("Fitness    = {fitness}".format(fitness=ga_instance.best_solution()[1]))
 
-    if ga_instance.generations_completed % 50 == 0:
+    if ga_instance.generations_completed % 10000 == 0:
         matplotlib.pyplot.imsave('solution_'+str(ga_instance.generations_completed)+'.png', gari.chromosome2img(ga_instance.best_solution()[0], target_im.shape))
     if ga_instance.generations_completed  == 1:
         matplotlib.pyplot.imsave('solution_'+str(1)+'.png', gari.chromosome2img(ga_instance.best_solution()[0], target_im.shape))
 
 
-ga_instance = pygad.GA(num_generations=100,
+ga_instance = pygad.GA(num_generations=100000,
                        num_parents_mating=10,
                        fitness_func=fitness_fun,
                        sol_per_pop=20,
