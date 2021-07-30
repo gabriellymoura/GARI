@@ -18,7 +18,7 @@ https://www.linkedin.com/in/ahmedfgad/
 """
 
 # Reading target image to be reproduced using Genetic Algorithm (GA).
-target_im = imageio.imread('fruit.jpg')
+target_im = imageio.imread('lenna.png')
 target_im = numpy.asarray(target_im/255, dtype=numpy.float)
 
 # Target image after enconding. Value encoding is used.
@@ -43,10 +43,13 @@ def callback(ga_instance):
     print("Generation = {gen}".format(gen=ga_instance.generations_completed))
     print("Fitness    = {fitness}".format(fitness=ga_instance.best_solution()[1]))
 
-    if ga_instance.generations_completed % 500 == 0:
+    if ga_instance.generations_completed % 50 == 0:
         matplotlib.pyplot.imsave('solution_'+str(ga_instance.generations_completed)+'.png', gari.chromosome2img(ga_instance.best_solution()[0], target_im.shape))
+    if ga_instance.generations_completed  == 1:
+        matplotlib.pyplot.imsave('solution_'+str(1)+'.png', gari.chromosome2img(ga_instance.best_solution()[0], target_im.shape))
 
-ga_instance = pygad.GA(num_generations=20000,
+
+ga_instance = pygad.GA(num_generations=100,
                        num_parents_mating=10,
                        fitness_func=fitness_fun,
                        sol_per_pop=20,
